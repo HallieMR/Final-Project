@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class RubyController : MonoBehaviour
 {
-    public float speed = 3.0f;
+    private float speed;
+    public float boostTimer;
+    private bool boosting;
 
     public int maxHealth = 5;
 
@@ -26,7 +28,7 @@ public class RubyController : MonoBehaviour
     float vertical;
 
     bool GameOver;
-    static bool Stage1Done;
+    bool Stage1Done;
     bool FourRobots;
 
     Animator animator;
@@ -40,6 +42,9 @@ public class RubyController : MonoBehaviour
     public AudioClip lossSound;
     public AudioClip backgroundMusic;
     public AudioClip collectedClip;
+    public AudioClip pickUpCog;
+    public AudioClip cogBagSound;
+    public AudioClip speedMusic;
     public AudioSource musicSource;
 
     public int scoreValue;
@@ -50,6 +55,8 @@ public class RubyController : MonoBehaviour
     public Text createdBy;
     public Text cogs;
     public Text visitJambi;
+    public Text speedTime;
+
 
     void Start()
     {
@@ -57,16 +64,21 @@ public class RubyController : MonoBehaviour
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
 
-        winText.text = "";
+        winText.text = " ";
         loseText.text = "";
-        createdBy.text = "";
+        createdBy.text = " ";
         cogs.text = "";
         visitJambi.text = "";
+        speedTime.text = " ";
         scoreValue = 0;
         GameOver = false;
         Stage1Done = false;
         FourRobots = false;
         cogAmount = 4;
+
+        speed = 3;
+        boostTimer = 8;
+        boosting = false;
 
         musicSource.clip = backgroundMusic;
         musicSource.Play();
@@ -146,6 +158,24 @@ public class RubyController : MonoBehaviour
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Challenge3 real with scene 2"))
         {
             Stage1Done = true;
+            print("Stage2!");
+        }
+
+        if (boosting == true)
+        {
+
+            //speedTime.text = "TIME: " + boostTimer.ToString(); 
+            boostTimer -= Time.deltaTime;            
+            
+            if (boostTimer <= 0)
+            {
+                speed = 3;
+                boostTimer = 0;
+                boosting = false;
+                musicSource.clip = backgroundMusic;
+                musicSource.Play();
+                speedTime.text = " ";
+            }
         }
 
     }
@@ -211,7 +241,7 @@ public class RubyController : MonoBehaviour
         scoreValue = scoreValue + addAmount;
         score.text = "FixedRobots: " + scoreValue.ToString();
 
-        if (scoreValue >= 4 )
+        if (scoreValue >= 4)
         {
             if (Stage1Done == true)
             {
@@ -238,8 +268,25 @@ public class RubyController : MonoBehaviour
         {
             cogAmount += 1;
             Destroy(collision.collider.gameObject);
-            PlaySound(collectedClip);
+            PlaySound(pickUpCog);
+        }
+        if(collision.collider.tag == "CogBag")
+        {
+            cogAmount += 8;
+            Destroy(collision.collider.gameObject);
+            PlaySound(cogBagSound);
         }
     }
 
-}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "SpeedBoost")
+        {
+            boosting = true;
+            speed = 6;
+            musicSource.clip = speedMusic;
+            musicSource.Play();
+            Destroy(other.gameObject);
+        }
+    }
+ }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Robot
   - Cog
+  - Zombie
+  - CogBag
+  - SpeedBoost
   layers:
   - Default
   - TransparentFX

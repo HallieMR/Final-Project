@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5343da578c73e994d9cf48c88531d3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  boostTimer: 0
   maxHealth: 5
   cogAmount: 0
   projectilePrefab: {fileID: 3008835486307700918, guid: 86089a84cc9087b43978222c40fa9ad6, type: 3}
@@ -111,6 +111,9 @@ MonoBehaviour:
   lossSound: {fileID: 8300000, guid: 6cfd609afd15325438ba7fabfcfc62f1, type: 3}
   backgroundMusic: {fileID: 8300000, guid: e406c04157c663a43b859646b7ad3c2a, type: 3}
   collectedClip: {fileID: 8300000, guid: af5f8b64e3f58f24c87ff8f789b04f6c, type: 3}
+  pickUpCog: {fileID: 8300000, guid: 97fa630b8e7911143970b2608d717475, type: 3}
+  cogBagSound: {fileID: 8300000, guid: 68240eb318a03274e8e717aa1180827a, type: 3}
+  speedMusic: {fileID: 8300000, guid: 4a3af0b40e9afd641ad2990e70ffe5c0, type: 3}
   musicSource: {fileID: -2281537565587506139}
   scoreValue: 0
   score: {fileID: 1578727549579190288, guid: 2be032464f9a4ba409864aeac19dca92, type: 3}
@@ -119,6 +122,7 @@ MonoBehaviour:
   createdBy: {fileID: 8313816601725271158, guid: cf6f18e03d754a9479915892414ec1bf, type: 3}
   cogs: {fileID: 1568516784449380896, guid: 103116ef02752184fb832cde23331278, type: 3}
   visitJambi: {fileID: 6217735993999910183, guid: bfb655c333f826c449623a7e093c004d, type: 3}
+  speedTime: {fileID: 8468790347239221479, guid: 74de7556021838849ac03f6cb542544b, type: 3}
 --- !u!50 &5462120505181961721
 Rigidbody2D:
   serializedVersion: 4

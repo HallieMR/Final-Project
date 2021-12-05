@@ -5,9 +5,11 @@ using UnityEngine;
 public class NonPlayerCharacter : MonoBehaviour
 {
     public float displayTime = 4.0f;
-    public GameObject dialogBox;
     float timerDisplay;
+    public GameObject dialogBox;
 
+    public AudioClip talking;
+    public AudioSource audioSource;
 
     void Start()
     {
@@ -23,6 +25,8 @@ public class NonPlayerCharacter : MonoBehaviour
             if (timerDisplay < 0)
             {
                 dialogBox.SetActive(false);
+                audioSource.Stop();
+
             }
         }
     }
@@ -31,5 +35,7 @@ public class NonPlayerCharacter : MonoBehaviour
     {
         timerDisplay = displayTime;
         dialogBox.SetActive(true);
+        audioSource.clip = talking;
+        audioSource.Play();
     }
 }

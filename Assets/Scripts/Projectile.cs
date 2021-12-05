@@ -30,6 +30,7 @@ public class Projectile : MonoBehaviour
         HardEnemyController h = other.collider.GetComponent<HardEnemyController>();
         EnemyController e = other.collider.GetComponent<EnemyController>();
         RubyController player = other.gameObject.GetComponent<RubyController>();
+        ZombieController z = other.collider.GetComponent<ZombieController>();
         if (e != null)
         {
             e.Fix();
@@ -40,6 +41,12 @@ public class Projectile : MonoBehaviour
             h.Fix();
             //player.setScore(1);
         }
+        if(z != null)
+        {
+            z.Die(-1);
+        }
+
+
 
         Destroy(gameObject);
     }
